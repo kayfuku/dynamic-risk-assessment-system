@@ -61,6 +61,26 @@ def dataframe_summary():
 
     return statistics
 
+
+def missing_percentage():
+    """
+    Calculate percentage of missing data for each column in finaldata.csv
+
+    Returns:
+        list[dict]: Each dict contains column name and percentage
+    """
+    logging.info("Loading and preparing finaldata.csv")
+    data_df = pd.read_csv(os.path.join(DATA_PATH, 'finaldata.csv'))
+
+    logging.info("Calculating missing data percentage")
+    missing_data_percentage = {}
+    for col in data_df.columns:
+        percentage = (data_df[col].isna().sum() / data_df.shape[0]) * 100
+        missing_data_percentage[col] = {'percentage': percentage}
+
+    return missing_data_percentage
+
+
 # Function to get timings
 
 
@@ -82,6 +102,9 @@ if __name__ == '__main__':
 
     statistics = dataframe_summary()
     print(statistics)
+
+    missing_data_percentage = missing_percentage()
+    print(missing_data_percentage)
 
     execution_time()
     outdated_packages_list()
