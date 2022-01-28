@@ -112,20 +112,20 @@ def _training_timing():
 def execution_time():
     """
     Get average execution time for data ingestion and model training
-    by running 20 times for each.
+    by running 10 times for each.
 
     Returns:
         running_time_means: means of execution times for each script
     """
     logging.info("Calculating time for ingestion.py")
     ingestion_time = []
-    for _ in range(20):
+    for _ in range(5):
         time = _ingestion_timing()
         ingestion_time.append(time)
 
     logging.info("Calculating time for training.py")
     training_time = []
-    for _ in range(20):
+    for _ in range(5):
         time = _training_timing()
         training_time.append(time)
 
@@ -136,12 +136,34 @@ def execution_time():
 
     return running_time_means
 
-# Function to check dependencies
-
 
 def outdated_packages_list():
-    # get a list of
-    pass
+    """
+    Check dependencies status from requirements.txt file using pip-outdated
+    which checks each package status if it is outdated or not
+
+    Returns:
+        dep: stdout of the pip-outdated command
+    """
+    logging.info("Checking outdated dependencies")
+    dependencies = subprocess.run([
+        'pip-outdated', '../requirements.txt'],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        encoding='utf-8')
+
+    dep = dependencies.stdout
+    dep = dep.translate(str.maketrans('', '', ' \t\r'))
+    dep = dep.split('\n')
+    dep = [dep[3]] + dep[5:-3]
+    dep = [s.split('|')[1:-1] for s in dep]
+
+    return dep
+
+    # dependencies = subprocess.check_output(
+    #     ['pip', 'list', '--outdated'],
+    # )
+    # return dependencies
 
 
 if __name__ == '__main__':
@@ -157,4 +179,6 @@ if __name__ == '__main__':
     running_time_means = execution_time()
     print(running_time_means)
 
-    outdated_packages_list()
+    dependencies = outdated_packages_list()
+    for row in dependencies:
+        print(row)
