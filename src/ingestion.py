@@ -14,10 +14,13 @@ from config import INPUT_FOLDER_PATH, DATA_PATH
 
 logging.basicConfig(level=logging.INFO)
 
-# Function for data ingestion
-
 
 def merge_multiple_dataframe():
+    """
+    Function for data ingestion. Merge multiple dataframe in a given directory,
+    INPUT_FOLDER_PATH, and dedup the duplicates and write it to DATA_PATH.
+    Also, save metadata in the DATA_PATH.
+    """
 
     df = pd.DataFrame()
     file_names = []
