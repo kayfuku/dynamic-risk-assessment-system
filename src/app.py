@@ -34,10 +34,7 @@ def predict():
     """
     filepath = request.get_json()['filepath']
 
-    df = pd.read_csv(filepath)
-    df = df.drop(['corporation', 'exited'], axis=1)
-
-    preds = diagnostics.model_predictions()
+    preds, _ = diagnostics.model_predictions(filepath)
     return jsonify(preds.tolist())
 
 

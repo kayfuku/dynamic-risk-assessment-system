@@ -19,7 +19,7 @@ import logging
 
 
 import diagnostics
-from config import MODEL_PATH
+from config import TEST_DATA_PATH, MODEL_PATH
 
 
 logging.basicConfig(level=logging.INFO)
@@ -30,7 +30,8 @@ def get_confusion_matrix():
     Plot a confusion matrix using the test data and the deployed model
     """
     logging.info("Predicting test data")
-    y_pred, y_true = diagnostics.model_predictions()
+    filepath = os.path.join(TEST_DATA_PATH, 'testdata.csv')
+    y_pred, y_true = diagnostics.model_predictions(filepath)
 
     logging.info("Plotting and saving confusion matrix")
     fig_cm, sub_cm = plt.subplots(figsize=(10, 10))

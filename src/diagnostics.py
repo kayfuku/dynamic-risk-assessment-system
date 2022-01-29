@@ -19,7 +19,7 @@ from config import TEST_DATA_PATH, PROD_DEPLOYMENT_PATH, DATA_PATH
 logging.basicConfig(level=logging.INFO)
 
 
-def model_predictions():
+def model_predictions(filepath):
     """
     Load test data and deployed model to predict on the test data.
 
@@ -168,7 +168,7 @@ def outdated_packages_list():
 
 
 if __name__ == '__main__':
-    y_pred = model_predictions()
+    y_pred = model_predictions(os.path.join(TEST_DATA_PATH, 'testdata.csv'))
     print(y_pred)
 
     statistics = dataframe_summary()
