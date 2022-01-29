@@ -139,8 +139,8 @@ def execution_time():
 
 def outdated_packages_list():
     """
-    Check dependencies status from requirements.txt file using pip-outdated
-    which checks each package status if it is outdated or not
+    Check dependencies from requirements.txt using pip-outdated
+    which checks each package if it is outdated or not.
 
     Returns:
         dep: stdout of the pip-outdated command
