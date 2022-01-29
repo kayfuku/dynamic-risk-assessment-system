@@ -1,20 +1,44 @@
+"""
+Call Flask API endpoints.
+Author: Kei
+Date: January, 2022
+"""
+import os
 import requests
-
-#Specify a URL that resolves to your workspace
-URL = "http://127.0.0.1/"
+import logging
 
 
+from config import TEST_DATA_PATH, MODEL_PATH
 
-#Call each API endpoint and store the responses
-response1 = #put an API call here
-response2 = #put an API call here
-response3 = #put an API call here
-response4 = #put an API call here
+logging.basicConfig(level=logging.INFO)
 
-#combine all API responses
-responses = #combine reponses here
+URL = "http://127.0.0.1:8000"
 
-#write the responses to your workspace
+logging.info(
+    f"Post request /prediction for {os.path.join(TEST_DATA_PATH, 'testdata.csv')}")
 
+response_pred = requests.post(
+    f'{URL}/prediction',
+    json={'filepath': os.path.join(TEST_DATA_PATH, 'testdata.csv')}).text
 
+logging.info("Get request /scoring")
+response_scor = requests.get(f'{URL}/scoring').text
 
+logging.info("Get request /summarystats")
+response_stat = requests.get(f'{URL}/summarystats').text
+
+logging.info("Get request /diagnostics")
+response_diag = requests.get(f'{URL}/diagnostics').text
+
+logging.info("Generating report text file")
+with open(os.path.join(MODEL_PATH, 'apireturns.txt'), 'w') as file:
+    file.write('Ingested Data\n\n')
+    file.write('Statistics Summary\n')
+    file.write(response_stat)
+    file.write('\nDiagnostics Summary\n')
+    file.write(response_diag)
+    file.write('\n\nTest Data\n\n')
+    file.write('Model Predictions\n')
+    file.write(response_pred)
+    file.write('\nModel Score\n')
+    file.write(response_scor)

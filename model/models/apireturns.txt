@@ -1,0 +1,198 @@
+Ingested Data
+
+Statistics Summary
+{
+  "lastmonth_activity": {
+    "mean": 165.65384615384616, 
+    "median": 73.0, 
+    "std": 284.0332293669447
+  }, 
+  "lastyear_activity": {
+    "mean": 1502.923076923077, 
+    "median": 955.0, 
+    "std": 2192.6449584568304
+  }, 
+  "number_of_employees": {
+    "mean": 26.884615384615383, 
+    "median": 14.0, 
+    "std": 31.353885785435814
+  }
+}
+
+Diagnostics Summary
+{
+  "execution_time": [
+    {
+      "ingest_time_mean": 0.6912284366
+    }, 
+    {
+      "train_time_mean": 1.3491505415999998
+    }
+  ], 
+  "missing_percentage": {
+    "corporation": {
+      "percentage": 0.0
+    }, 
+    "exited": {
+      "percentage": 0.0
+    }, 
+    "lastmonth_activity": {
+      "percentage": 0.0
+    }, 
+    "lastyear_activity": {
+      "percentage": 0.0
+    }, 
+    "number_of_employees": {
+      "percentage": 0.0
+    }
+  }, 
+  "outdated_packages": [
+    [
+      "Name", 
+      "Installed", 
+      "Wanted", 
+      "Latest"
+    ], 
+    [
+      "click", 
+      "7.1.2", 
+      "7.1.2", 
+      "8.0.3"
+    ], 
+    [
+      "cycler", 
+      "0.10.0", 
+      "0.10.0", 
+      "0.11.0"
+    ], 
+    [
+      "Flask", 
+      "1.1.2", 
+      "1.1.2", 
+      "2.0.2"
+    ], 
+    [
+      "gunicorn", 
+      "20.0.4", 
+      "20.0.4", 
+      "20.1.0"
+    ], 
+    [
+      "itsdangerous", 
+      "1.1.0", 
+      "1.1.0", 
+      "2.0.1"
+    ], 
+    [
+      "Jinja2", 
+      "2.11.3", 
+      "2.11.3", 
+      "3.0.3"
+    ], 
+    [
+      "joblib", 
+      "1.0.1", 
+      "1.0.1", 
+      "1.1.0"
+    ], 
+    [
+      "kiwisolver", 
+      "1.3.1", 
+      "1.3.1", 
+      "1.3.2"
+    ], 
+    [
+      "MarkupSafe", 
+      "1.1.1", 
+      "1.1.1", 
+      "2.0.1"
+    ], 
+    [
+      "matplotlib", 
+      "3.3.4", 
+      "3.3.4", 
+      "3.5.1"
+    ], 
+    [
+      "numpy", 
+      "1.20.1", 
+      "1.20.1", 
+      "1.22.1"
+    ], 
+    [
+      "pandas", 
+      "1.2.2", 
+      "1.2.2", 
+      "1.4.0"
+    ], 
+    [
+      "Pillow", 
+      "8.1.0", 
+      "8.1.0", 
+      "9.0.0"
+    ], 
+    [
+      "pyparsing", 
+      "2.4.7", 
+      "2.4.7", 
+      "3.0.7"
+    ], 
+    [
+      "python-dateutil", 
+      "2.8.1", 
+      "2.8.1", 
+      "2.8.2"
+    ], 
+    [
+      "pytz", 
+      "2021.1", 
+      "2021.1", 
+      "2021.3"
+    ], 
+    [
+      "scikit-learn", 
+      "1.0.2", 
+      "0.24.1", 
+      "1.0.2"
+    ], 
+    [
+      "scipy", 
+      "1.6.1", 
+      "1.6.1", 
+      "1.7.3"
+    ], 
+    [
+      "seaborn", 
+      "0.11.1", 
+      "0.11.1", 
+      "0.11.2"
+    ], 
+    [
+      "six", 
+      "1.15.0", 
+      "1.15.0", 
+      "1.16.0"
+    ], 
+    [
+      "threadpoolctl", 
+      "2.1.0", 
+      "2.1.0", 
+      "3.0.0"
+    ]
+  ]
+}
+
+
+Test Data
+
+Model Predictions
+[
+  0, 
+  1, 
+  1, 
+  1, 
+  1
+]
+
+Model Score
+f1 score = 0.5714285714285715

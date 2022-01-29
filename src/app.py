@@ -9,7 +9,7 @@ import numpy as np
 import pickle
 import json
 import os
-
+import subprocess
 
 import diagnostics
 
@@ -30,7 +30,7 @@ def predict():
     Load data given the file path and call the prediction function in diagnostics.py
 
     Returns:
-        json: model predictions
+        json, predictions
     """
     filepath = request.get_json()['filepath']
 
@@ -41,23 +41,24 @@ def predict():
 @app.route("/scoring", methods=['GET', 'OPTIONS'])
 def score():
     """
-    Scoring endpoint that runs the script scoring.py and
+    Run the script scoring.py and
     gets the score of the deployed model
 
     Returns:
-        str: model f1 score
+        str, model f1 score
     """
-    output = subprocess.run(['python', 'scoring.py'],
-                            capture_output=True).stdout
-    output = re.findall(r'f1 score = \d*\.?\d+', output.decode())[0]
+    output = subprocess.run(
+        ['python', 'scoring.py'],
+        capture_output=True).stdout
+    # print("output:", output)
+    # output = re.findall(r'f1 score = \d*\.?\d+', output.decode())[0]
     return output
 
 
 @app.route("/summarystats", methods=['GET', 'OPTIONS'])
 def stats():
     """
-    Summary statistics endpoint that calls dataframe summary
-    function from diagnostics.py
+    Call dataframe summary function from diagnostics.py
 
     Returns:
         json: summary statistics
@@ -68,8 +69,8 @@ def stats():
 @app.route("/diagnostics", methods=['GET', 'OPTIONS'])
 def diag():
     """
-    Diagnostics endpoint thats calls missing_percentage, execution_time,
-    and outdated_package_list from diagnostics.py
+    Call missing_percentage, execution_time, and outdated_package_list
+    from diagnostics.py
 
     Returns:
         dict: missing percentage, execution time and outdated packages
