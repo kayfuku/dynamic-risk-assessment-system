@@ -28,7 +28,8 @@ def model_predictions():
     """
     logging.info("Loading and preparing testdata.csv")
     test_df = pd.read_csv(os.path.join(TEST_DATA_PATH, 'testdata.csv'))
-    X_df = test_df.drop(['corporation', 'exited'], axis=1)
+    y_df = test_df.pop('exited')
+    X_df = test_df.drop(['corporation'], axis=1)
 
     logging.info("Loading deployed model")
     with open(os.path.join(PROD_DEPLOYMENT_PATH, 'trainedmodel.pkl'), 'rb') as f:
@@ -37,7 +38,7 @@ def model_predictions():
     logging.info("Making predictions on data")
     y_pred = model.predict(X_df)
 
-    return y_pred
+    return y_pred, y_df
 
 
 def dataframe_summary():
