@@ -50,8 +50,7 @@ def score():
     output = subprocess.run(
         ['python', 'scoring.py'],
         capture_output=True).stdout
-    # print("output:", output)
-    # output = re.findall(r'f1 score = \d*\.?\d+', output.decode())[0]
+
     return output
 
 
