@@ -11,7 +11,9 @@ import json
 import os
 import subprocess
 
+from config import TEST_DATA_PATH, PROD_DEPLOYMENT_PATH
 import diagnostics
+import scoring
 
 
 # Set up variables for use in our script
@@ -32,9 +34,9 @@ def predict():
     Returns:
         json, predictions
     """
-    filepath = request.get_json()['filepath']
+    data_path = request.get_json()['filepath']
+    _, preds = diagnostics.model_predictions(data_path)
 
-    preds, _ = diagnostics.model_predictions(filepath)
     return jsonify(preds.tolist())
 
 
@@ -47,11 +49,11 @@ def score():
     Returns:
         str, model f1 score
     """
-    output = subprocess.run(
-        ['python', 'scoring.py'],
-        capture_output=True).stdout
+    output = scoring.score_model(
+        os.path.join(TEST_DATA_PATH, 'testdata.csv'),
+        os.path.join(PROD_DEPLOYMENT_PATH, 'trainedmodel.pkl'))
 
-    return output
+    return str(output)
 
 
 @app.route("/summarystats", methods=['GET', 'OPTIONS'])

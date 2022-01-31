@@ -14,7 +14,7 @@ from sklearn.linear_model import LogisticRegression
 import json
 import logging
 
-from config import DATA_PATH, MODEL_PATH
+from config import CLEANED_DATA_PATH, MODEL_PATH
 
 logging.basicConfig(level=logging.INFO)
 
@@ -25,7 +25,7 @@ def train_model():
      and saves the model
      """
     logging.info("Loading and preparing finaldata.csv")
-    data_df = pd.read_csv(os.path.join(DATA_PATH, 'finaldata.csv'))
+    data_df = pd.read_csv(os.path.join(CLEANED_DATA_PATH, 'finaldata.csv'))
     y_df = data_df.pop('exited')
     X_df = data_df.drop(['corporation'], axis=1)
 

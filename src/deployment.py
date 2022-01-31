@@ -15,7 +15,7 @@ import json
 import logging
 import shutil
 
-from config import DATA_PATH, MODEL_PATH, PROD_DEPLOYMENT_PATH
+from config import CLEANED_DATA_PATH, MODEL_PATH, PROD_DEPLOYMENT_PATH
 
 logging.basicConfig(level=logging.INFO)
 
@@ -29,7 +29,7 @@ def deploy_model():
     logging.info(
         "Copying trainedmodel.pkl, ingestedfiles.txt and latestscore.txt")
     shutil.copy(
-        os.path.join(DATA_PATH, 'ingestedfiles.txt'),
+        os.path.join(CLEANED_DATA_PATH, 'ingestedfiles.txt'),
         PROD_DEPLOYMENT_PATH)
     shutil.copy(
         os.path.join(MODEL_PATH, 'trainedmodel.pkl'),

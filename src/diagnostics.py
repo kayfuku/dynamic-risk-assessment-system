@@ -14,12 +14,12 @@ import logging
 import pickle
 import subprocess
 
-from config import TEST_DATA_PATH, PROD_DEPLOYMENT_PATH, DATA_PATH
+from config import TEST_DATA_PATH, PROD_DEPLOYMENT_PATH, CLEANED_DATA_PATH
 
 logging.basicConfig(level=logging.INFO)
 
 
-def model_predictions(filepath):
+def model_predictions(data_path):
     """
     Load test data and deployed model to predict on the test data.
 
@@ -27,7 +27,7 @@ def model_predictions(filepath):
         y_pred: predictions
     """
     logging.info("Loading and preparing testdata.csv")
-    test_df = pd.read_csv(os.path.join(TEST_DATA_PATH, 'testdata.csv'))
+    test_df = pd.read_csv(data_path)
     y_df = test_df.pop('exited')
     X_df = test_df.drop(['corporation'], axis=1)
 
@@ -38,7 +38,7 @@ def model_predictions(filepath):
     logging.info("Making predictions on data")
     y_pred = model.predict(X_df)
 
-    return y_pred, y_df
+    return y_df, y_pred
 
 
 def dataframe_summary():
@@ -49,7 +49,7 @@ def dataframe_summary():
         statistics: dict, key: column, value: dict of statistics for that column.
     """
     logging.info("Loading and preparing finaldata.csv")
-    data_df = pd.read_csv(os.path.join(DATA_PATH, 'finaldata.csv'))
+    data_df = pd.read_csv(os.path.join(CLEANED_DATA_PATH, 'finaldata.csv'))
     data_df = data_df.drop(['exited'], axis=1)
     data_df = data_df.select_dtypes(include='number')
 
@@ -73,7 +73,7 @@ def missing_percentage():
         list[dict]: Each dict contains column name and percentage
     """
     logging.info("Loading and preparing finaldata.csv")
-    data_df = pd.read_csv(os.path.join(DATA_PATH, 'finaldata.csv'))
+    data_df = pd.read_csv(os.path.join(CLEANED_DATA_PATH, 'finaldata.csv'))
 
     logging.info("Calculating missing data percentage")
     missing_data_percentage = {}
@@ -168,18 +168,23 @@ def outdated_packages_list():
 
 
 if __name__ == '__main__':
-    y_pred = model_predictions(os.path.join(TEST_DATA_PATH, 'testdata.csv'))
-    print(y_pred)
+    print("Model predictions on testdata.csv:")
+    _, y_pred = model_predictions(os.path.join(TEST_DATA_PATH, 'testdata.csv'))
+    print("y_pred:", y_pred)
 
+    print("Summary statistics")
     statistics = dataframe_summary()
     print(json.dumps(statistics, indent=4))
 
+    print("Missing percentage")
     missing_data_percentage = missing_percentage()
     print(json.dumps(missing_data_percentage, indent=4))
 
+    print("Execution time")
     running_time_means = execution_time()
     print(running_time_means)
 
+    print("Outdated Packages")
     dependencies = outdated_packages_list()
     for row in dependencies:
         print(row)
