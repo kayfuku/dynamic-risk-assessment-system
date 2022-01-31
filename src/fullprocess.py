@@ -91,10 +91,6 @@ def main():
     reporting.get_confusion_matrix()
     # reporting.generate_pdf_report()
 
-    # 8. Call APIs.
-    logging.info("Calling APIs")
-    os.system("python apicalls.py")
-
 
 if __name__ == '__main__':
     main()
