@@ -3,7 +3,6 @@ Full process of ML pipeline with checking model drift.
 Author: Kei
 Date: January, 2022
 """
-import sys
 import os
 import sys
 import logging
@@ -97,6 +96,8 @@ logging.info("Running diagnostics and reporting")
 reporting.get_confusion_matrix()
 # reporting.generate_pdf_report()
 
+# 8. Call APIs.
+os.system("python apicalls.py")
 
 # if __name__ == '__main__':
 #     main()

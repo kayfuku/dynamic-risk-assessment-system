@@ -3,6 +3,7 @@ Ingest data
 Author: Kei
 Date: January, 2022
 """
+import sys
 import pandas as pd
 import numpy as np
 import os
@@ -12,7 +13,7 @@ import logging
 
 from config import INPUT_DATA_PATH, CLEANED_DATA_PATH
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
 def merge_multiple_dataframe():
