@@ -21,7 +21,7 @@ from config import (
     MODEL_PATH,
     PROD_DEPLOYMENT_PATH
 )
-sys.path.append(os.getcwd())
+# sys.path.append(os.getcwd())
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
