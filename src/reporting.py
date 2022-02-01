@@ -32,7 +32,7 @@ def get_confusion_matrix():
     """
     logging.info("Predicting test data")
     filepath = os.path.join(TEST_DATA_PATH, 'testdata.csv')
-    y_pred, y_true = diagnostics.model_predictions(filepath)
+    y_true, y_pred = diagnostics.model_predictions(filepath)
 
     logging.info("Plotting and saving confusion matrix")
     fig_cm, sub_cm = plt.subplots(figsize=(10, 10))
