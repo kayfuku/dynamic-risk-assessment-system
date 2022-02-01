@@ -3,6 +3,7 @@ Diagnose model and data
 Author: Kei
 Date: January, 2022
 """
+import sys
 from textwrap import indent
 from xml.etree.ElementInclude import include
 import pandas as pd
@@ -16,7 +17,7 @@ import subprocess
 
 from config import TEST_DATA_PATH, PROD_DEPLOYMENT_PATH, CLEANED_DATA_PATH
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
 def model_predictions(data_path):

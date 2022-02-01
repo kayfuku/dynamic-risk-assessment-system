@@ -3,6 +3,7 @@ Score a model
 Author: Kei
 Date: January, 2022
 """
+import sys
 from flask import Flask, session, jsonify, request
 import pandas as pd
 import numpy as np
@@ -15,7 +16,7 @@ import json
 import logging
 from config import MODEL_PATH, TEST_DATA_PATH
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
 def score_model(data_path, model_path):

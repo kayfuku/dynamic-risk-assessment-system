@@ -3,6 +3,7 @@ Deploy a model
 Author: Kei
 Date: January, 2022
 """
+import sys
 from flask import Flask, session, jsonify, request
 import pandas as pd
 import numpy as np
@@ -17,7 +18,7 @@ import shutil
 
 from config import CLEANED_DATA_PATH, MODEL_PATH, PROD_DEPLOYMENT_PATH
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
 def deploy_model():

@@ -3,6 +3,7 @@ Call Flask API endpoints.
 Author: Kei
 Date: January, 2022
 """
+import sys
 import os
 import requests
 import logging
@@ -10,7 +11,7 @@ import logging
 
 from config import TEST_DATA_PATH, MODEL_PATH
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 URL = "http://127.0.0.1:8000"
 

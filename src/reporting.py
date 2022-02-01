@@ -3,6 +3,7 @@ Model Reporting
 Author: Kei
 Date: January, 2022
 """
+import sys
 import pickle
 from sklearn.model_selection import train_test_split
 import pandas as pd
@@ -22,7 +23,7 @@ import diagnostics
 from config import TEST_DATA_PATH, MODEL_PATH
 
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
 def get_confusion_matrix():

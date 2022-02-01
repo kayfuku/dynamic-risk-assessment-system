@@ -3,6 +3,7 @@ Full process of ML pipeline with checking model drift.
 Author: Kei
 Date: January, 2022
 """
+import sys
 import os
 import sys
 import logging
@@ -22,7 +23,7 @@ from config import (
     PROD_DEPLOYMENT_PATH
 )
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
 # def main():
