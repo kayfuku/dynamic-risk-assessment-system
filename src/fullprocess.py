@@ -26,6 +26,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 def main():
+    print("fullprocess.py started")
     # 1. Check and read new data
     logging.info("Checking for new data")
     with open(os.path.join(PROD_DEPLOYMENT_PATH, "ingestedfiles.txt")) as file:
