@@ -54,6 +54,6 @@ def train_model():
         pickle.dump(model, f)
 
 
-if __name__ == '__main__':
-    logging.info("Running training.py")
-    train_model()
+# if __name__ == '__main__':
+#     logging.info("Running training.py")
+#     train_model()

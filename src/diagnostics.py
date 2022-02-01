@@ -167,24 +167,24 @@ def outdated_packages_list():
     # return dependencies
 
 
-if __name__ == '__main__':
-    print("Model predictions on testdata.csv:")
-    _, y_pred = model_predictions(os.path.join(TEST_DATA_PATH, 'testdata.csv'))
-    print("y_pred:", y_pred)
+# if __name__ == '__main__':
+#     print("Model predictions on testdata.csv:")
+#     _, y_pred = model_predictions(os.path.join(TEST_DATA_PATH, 'testdata.csv'))
+#     print("y_pred:", y_pred)
 
-    print("Summary statistics")
-    statistics = dataframe_summary()
-    print(json.dumps(statistics, indent=4))
+#     print("Summary statistics")
+#     statistics = dataframe_summary()
+#     print(json.dumps(statistics, indent=4))
 
-    print("Missing percentage")
-    missing_data_percentage = missing_percentage()
-    print(json.dumps(missing_data_percentage, indent=4))
+#     print("Missing percentage")
+#     missing_data_percentage = missing_percentage()
+#     print(json.dumps(missing_data_percentage, indent=4))
 
-    print("Execution time")
-    running_time_means = execution_time()
-    print(running_time_means)
+#     print("Execution time")
+#     running_time_means = execution_time()
+#     print(running_time_means)
 
-    print("Outdated Packages")
-    dependencies = outdated_packages_list()
-    for row in dependencies:
-        print(row)
+#     print("Outdated Packages")
+#     dependencies = outdated_packages_list()
+#     for row in dependencies:
+#         print(row)

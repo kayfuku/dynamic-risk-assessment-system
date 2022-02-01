@@ -25,73 +25,76 @@ from config import (
 logging.basicConfig(level=logging.INFO)
 
 
-def main():
-    print("fullprocess.py started")
-    # 1. Check and read new data
-    logging.info("Checking for new data")
-    with open(os.path.join(PROD_DEPLOYMENT_PATH, "ingestedfiles.txt")) as file:
-        ingested_files = {line.strip('\n') for line in file.readlines()[1:]}
+# def main():
 
-    # Determine whether the source data folder has files that aren't
-    # listed in ingestedfiles.txt
-    source_files = set(os.listdir(INPUT_DATA_PATH))
+print("fullprocess.py started")
+# 1. Check and read new data
+logging.info("Checking for new data")
+with open(os.path.join(PROD_DEPLOYMENT_PATH, "ingestedfiles.txt")) as file:
+    ingested_files = {line.strip('\n') for line in file.readlines()[1:]}
 
-    # 2. Deciding whether to proceed, part 1
-    # If you found new data, you should proceed. otherwise, do end the process
-    # here.
-    # With this condition, ingestion.py will run even when some of the files are
-    # not in the sourcedata dir.
-    if len(source_files.difference(ingested_files)) == 0:
-        logging.info("No new data found")
-        return None
+# Determine whether the source data folder has files that aren't
+# listed in ingestedfiles.txt
+source_files = set(os.listdir(INPUT_DATA_PATH))
 
-    # 3. Ingesting new data
-    logging.info("Ingesting new data")
-    ingestion.merge_multiple_dataframe()
+# 2. Deciding whether to proceed, part 1
+# If you found new data, you should proceed. otherwise, do end the process
+# here.
+# With this condition, ingestion.py will run even when some of the files are
+# not in the sourcedata dir.
+if len(source_files.difference(ingested_files)) == 0:
+    logging.info("No new data found")
+    # return None
+    exit()
 
-    # 4. Check whether the score from the deployed model is different from the
-    # score from the model that uses the newest ingested data
-    logging.info("Checking for model drift")
-    # Get a new f1 score on the new model and test data.
-    new_score = scoring.score_model(
-        os.path.join(CLEANED_DATA_PATH, 'finaldata.csv'),
-        os.path.join(PROD_DEPLOYMENT_PATH, 'trainedmodel.pkl'))
+# 3. Ingesting new data
+logging.info("Ingesting new data")
+ingestion.merge_multiple_dataframe()
 
-    with open(os.path.join(PROD_DEPLOYMENT_PATH, "latestscore.txt"), 'r') as f:
-        deployed_score = f.read()
+# 4. Check whether the score from the deployed model is different from the
+# score from the model that uses the newest ingested data
+logging.info("Checking for model drift")
+# Get a new f1 score on the new model and test data.
+new_score = scoring.score_model(
+    os.path.join(CLEANED_DATA_PATH, 'finaldata.csv'),
+    os.path.join(PROD_DEPLOYMENT_PATH, 'trainedmodel.pkl'))
 
-    # Deciding whether to proceed, part 2
-    # Let's just pretend to be lower score.
-    new_score = 0.22
-    logging.info(f"Deployed score: {deployed_score}")
-    logging.info(f"New score: {new_score}")
+with open(os.path.join(PROD_DEPLOYMENT_PATH, "latestscore.txt"), 'r') as f:
+    deployed_score = f.read()
 
-    # If you found model drift, you should proceed. otherwise, do end the
-    # process here
-    if new_score >= float(deployed_score):
-        logging.info("No model drift occurred")
-        return None
+# Deciding whether to proceed, part 2
+# Let's just pretend to be lower score.
+new_score = 0.22
+logging.info(f"Deployed score: {deployed_score}")
+logging.info(f"New score: {new_score}")
 
-    # Model Drift has occurred!!
-    logging.info("Model Drift has occurred!!")
+# If you found model drift, you should proceed. otherwise, do end the
+# process here
+if new_score >= float(deployed_score):
+    logging.info("No model drift occurred")
+    # return None
+    exit()
 
-    # 5. Re-training
-    logging.info("Re-training model")
-    training.train_model()
-    logging.info("Re-scoring model")
-    scoring.score_model(
-        os.path.join(CLEANED_DATA_PATH, 'finaldata.csv'),
-        os.path.join(MODEL_PATH, 'trainedmodel.pkl'))
+# Model Drift has occurred!!
+logging.info("Model Drift has occurred!!")
 
-    # 6. Re-deployment
-    logging.info("Re-deploying model")
-    deployment.deploy_model()
+# 5. Re-training
+logging.info("Re-training model")
+training.train_model()
+logging.info("Re-scoring model")
+scoring.score_model(
+    os.path.join(CLEANED_DATA_PATH, 'finaldata.csv'),
+    os.path.join(MODEL_PATH, 'trainedmodel.pkl'))
 
-    # 7. Diagnostics and reporting
-    logging.info("Running diagnostics and reporting")
-    reporting.get_confusion_matrix()
-    # reporting.generate_pdf_report()
+# 6. Re-deployment
+logging.info("Re-deploying model")
+deployment.deploy_model()
+
+# 7. Diagnostics and reporting
+logging.info("Running diagnostics and reporting")
+reporting.get_confusion_matrix()
+# reporting.generate_pdf_report()
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

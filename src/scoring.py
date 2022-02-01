@@ -47,7 +47,7 @@ def score_model(data_path, model_path):
     return f1
 
 
-if __name__ == '__main__':
-    logging.info("Running scoring.py")
-    score_model(os.path.join(TEST_DATA_PATH, 'testdata.csv'),
-                os.path.join(MODEL_PATH, 'trainedmodel.pkl'))
+# if __name__ == '__main__':
+#     logging.info("Running scoring.py")
+#     score_model(os.path.join(TEST_DATA_PATH, 'testdata.csv'),
+#                 os.path.join(MODEL_PATH, 'trainedmodel.pkl'))

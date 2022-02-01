@@ -39,6 +39,6 @@ def deploy_model():
         PROD_DEPLOYMENT_PATH)
 
 
-if __name__ == '__main__':
-    logging.info("Running deployment.py")
-    deploy_model()
+# if __name__ == '__main__':
+#     logging.info("Running deployment.py")
+#     deploy_model()
