@@ -1,0 +1,1 @@
+*/10 * * * * /home/workspace/dynamic-risk-assessment-system/execute_fullprocess.sh
