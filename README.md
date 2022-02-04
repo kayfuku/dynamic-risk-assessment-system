@@ -1,4 +1,4 @@
-# dynamic-risk-assessment-syste
+# dynamic-risk-assessment-system
 The final project ML DevOps Engineer Nanodegree by Udacity.  
 
 ## Overview
