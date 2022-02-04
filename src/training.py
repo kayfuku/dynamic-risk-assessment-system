@@ -22,9 +22,9 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 def train_model():
     """
-     Train a model on ingested data and
-     and saves the model
-     """
+    Train a model on ingested data and
+    and saves the model
+    """
     logging.info("Loading and preparing finaldata.csv")
     data_df = pd.read_csv(os.path.join(CLEANED_DATA_PATH, 'finaldata.csv'))
     y_df = data_df.pop('exited')
