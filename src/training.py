@@ -54,7 +54,7 @@ def train_model():
     with open(os.path.join(MODEL_PATH, 'trainedmodel.pkl'), 'wb') as f:
         pickle.dump(model, f)
 
-
+# # Comment out when fullprocess.py executed.
 # if __name__ == '__main__':
 #     logging.info("Running training.py")
 #     train_model()

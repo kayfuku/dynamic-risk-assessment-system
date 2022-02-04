@@ -9,12 +9,12 @@ import logging
 import pandas as pd
 from sklearn.metrics import f1_score
 
-import scoring
-import training
 import ingestion
-import reporting
+import training
+import scoring
 import deployment
 import diagnostics
+import reporting
 from config import (
     INPUT_DATA_PATH,
     CLEANED_DATA_PATH,
@@ -99,5 +99,7 @@ reporting.get_confusion_matrix()
 # 8. Call APIs.
 os.system("python apicalls.py")
 
+
+# # Comment out when fullprocess.py executed.
 # if __name__ == '__main__':
 #     main()

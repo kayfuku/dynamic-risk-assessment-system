@@ -49,5 +49,6 @@ def get_confusion_matrix():
     fig_cm.savefig(os.path.join(MODEL_PATH, 'confusionmatrix.png'))
 
 
+# # Comment out when fullprocess.py executed.
 # if __name__ == '__main__':
 #     get_confusion_matrix()

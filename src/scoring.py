@@ -48,6 +48,7 @@ def score_model(data_path, model_path):
     return f1
 
 
+# # Comment out when fullprocess.py executed.
 # if __name__ == '__main__':
 #     logging.info("Running scoring.py")
 #     score_model(os.path.join(TEST_DATA_PATH, 'testdata.csv'),

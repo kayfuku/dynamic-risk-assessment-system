@@ -48,6 +48,7 @@ def merge_multiple_dataframe():
     df.to_csv(os.path.join(CLEANED_DATA_PATH, 'finaldata.csv'), index=False)
 
 
+# # Comment out when fullprocess.py executed.
 # if __name__ == '__main__':
 #     logging.info("Running ingestion.py")
 #     merge_multiple_dataframe()

@@ -168,6 +168,7 @@ def outdated_packages_list():
     # return dependencies
 
 
+# # Comment out when fullprocess.py executed.
 # if __name__ == '__main__':
 #     print("Model predictions on testdata.csv:")
 #     _, y_pred = model_predictions(os.path.join(TEST_DATA_PATH, 'testdata.csv'))
